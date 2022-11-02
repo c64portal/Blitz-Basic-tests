@@ -1,0 +1,41 @@
+;---------------------------------------------------
+; HAM Raytrace Anim player
+;
+; by Carrion/Retronavigator
+;
+; v01 Proof of Concept
+;---------------------------------------------------
+
+bmp=0
+pal=0
+dlist=0
+
+#HEIGHT=128
+#ANIMFRAMES=11
+
+BitMap bmp,160,1408,6
+LoadBitMap bmp,"data/hamanim.iff",pal
+
+BLITZ
+InitCopList dlist, 94, #HEIGHT, $86, 8,16,0
+DisplayAdjust dlist,-10,42,0,80,-65
+
+CreateDisplay dlist
+DisplayPalette dlist,pal
+
+;------------------- mainloop
+
+dy=0    ; current frame
+
+Repeat
+  VWait 2
+  DisplayBitMap dlist,0,0,dy
+
+  dy = dy + #HEIGHT
+  If dy=#HEIGHT*#ANIMFRAMES Then dy=0
+
+Until (Joyb(0)=1)
+
+End
+
+

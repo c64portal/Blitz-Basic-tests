@@ -1,0 +1,82 @@
+;---------------------------------------------------
+; Rotating Animated Block
+; Part of Alien Apparat demo by Carrion
+;
+; coded by Carrion
+; (c) by Retronavigator 2019
+;---------------------------------------------------
+
+  WBStartup
+  NoCli
+
+  BitMap 0,320,80*25,2
+  LoadBitMap 0,"data/block.iff",0
+
+InitPalette 0,4
+
+PalRGB 0,0,0,3,4
+PalRGB 0,1,4,6,8
+PalRGB 0,2,4,6,8
+
+#MODULO1=$108
+#MODULO2=$10a
+
+MyCustomCop$;
+MyCustomCop$ = Mki$((163 LSL 8)+$01)+Mki$($FFFE)
+MyCustomCop$ + Mki$(#MODULO1)+Mki$(-81)  ;
+MyCustomCop$ + Mki$(#MODULO2)+Mki$(-81)  ;
+
+dlist=1
+
+BLITZ
+
+InitCopList dlist,84,150,$12,8,4,2+(Len(MyCustomCop$)/4)
+CreateDisplay dlist
+CustomString dlist,0,0,MyCustomCop$
+
+cf=0
+cff=1
+r1=0
+r2=25
+
+;---------------------------------- mainloop
+Repeat
+
+  VWait
+  DisplayBitMap dlist,0,0,dy
+
+  c1=Peek.b(?animBlockColors+r1)
+  c2=Peek.b(?animBlockColors+r2)
+
+  PalRGB 0,1,c1/1.75,c1/1.2,c1/cff
+  PalRGB 0,2,c2/1.75,c2/1.2,c2/cff
+
+  cf+1
+  If cf=50
+    cff+0.5
+    cf=0
+  EndIf
+
+  r1+1
+  r2-1
+  If r1=25 Then r1=0
+  If r2=0 Then r2=25
+
+  dy = dy + 80
+  If dy=80*25 Then dy=0
+
+  DisplayPalette dlist,0
+
+Until (Joyb(0)=1)
+
+Free BitMap 0
+
+End
+
+;-------------------------------------------------
+
+animBlockColors:
+Dc.b  $0f,$0f,$0f,$0f,$0e,$0e,$0d,$0d,$0c,$0c
+Dc.b  $0b,$0b,$0a,$0a,$09,$08,$07,$06,$5,$4,3,2,1,0,0,0
+
+
