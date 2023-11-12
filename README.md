@@ -33,7 +33,9 @@ Source code to other demoparts from this demo will be released here ASAP.
 
 This is POC (proof-of-concept) code that is based on a discussion on EAB (English Amiga Board) forum. I cant find the link ATM.
 The upscroll partially works. Partially because it starts to break after few screens scrolled. It's due to some miscalculations but I dont have the time to fix it now. The idea is there and after some fixes it should work.
+
 The gfx is done by me for this test purpose. Some of the tiles were later used for my C64 pic called: "Planet, Rock, Lobster", here: https://csdb.dk/release/?id=219613
+
 You can use the tiles if you want If you reuse the tiles please credit me and let me know. TIA.
 The code is for AGA, as it was planned for a shooter game that I planned but stopped developing. I will restart the development of this game maybe some day. ;)
 
